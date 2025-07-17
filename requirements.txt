@@ -1,0 +1,4 @@
+xgboost
+joblib
+pandas
+# tkinter is built-in with Python, no need to install 

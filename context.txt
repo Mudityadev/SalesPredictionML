@@ -1,0 +1,50 @@
+# Project Overview
+
+We are building a **desktop GUI application using Tkinter** in Python that predicts the **total combined sales** for a product across three stores using a **trained XGBoost regression model**. The model has been trained on historical sales data and saved as `xgb_sales_model.pkl`, with the column structure saved as `model_columns.pkl`.
+
+# Goals
+
+- Create a user-friendly **desktop app** where users input product and environment details (e.g., day, store, product, promotion, weather, etc.).
+- The app uses the **trained ML model** to predict and display the **expected total sales amount**.
+- Provide an option to later package the app into a `.exe` file using PyInstaller.
+
+# Functional Requirements
+
+- Build GUI using **Tkinter** (standard Python library).
+- Input fields required:
+  - Product Calorie (float)
+  - Promotion Applied (checkbox)
+  - Day (dropdown: Monday to Sunday)
+  - StoreID (dropdown: S001, S002, S003)
+  - Product Name (dropdown: VBurger)
+  - Weather (dropdown: cold, hot, humid, rainy, very hot)
+  - Inflation % (float)
+  - Unemployment % (float)
+
+- On clicking "Predict":
+  - GUI captures user input.
+  - Creates a feature vector compatible with `model_columns.pkl`.
+  - Loads the model (`xgb_sales_model.pkl`) using `joblib`.
+  - Predicts the total sales and shows the result in a popup.
+
+# Technical Details
+
+- Machine Learning model: **XGBoostRegressor**
+- Preprocessing includes one-hot encoding for categorical values (like Day, StoreID, Weather).
+- Model trained in Google Colab and saved locally as `xgb_sales_model.pkl`.
+- All missing columns in the test input are filled with zero to match training columns.
+
+# Files Expected
+
+- `app.py` - the complete Tkinter GUI app
+- `xgb_sales_model.pkl` - the trained XGBoost model
+- `model_columns.pkl` - list of feature column names used by the model
+- `requirements.txt` - optional, includes: `xgboost`, `joblib`, `pandas`, `tkinter` (built-in)
+
+# Optional Extensions
+
+- Add input fields for "specials" and "mods"
+- Add charts or historical prediction graphs
+- Create a `.exe` version using PyInstaller:
+  ```bash
+  pyinstaller --onefile app.py
